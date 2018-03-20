@@ -76,14 +76,15 @@ public:
          if (closestRequest == -1) break;
          orderedRequests.push_back (closestRequest);
          removeRequest (requests, closestRequest);
-      }
-
-      std::vector<int> ::iterator it;
-      for (it = ++orderedRequests.begin (); it != orderedRequests.end (); ++it)
-      {
-         currentLocation = *it;
+         currentLocation = orderedRequests[i + 1];
          record ();
       }
+
+//      for (std::vector<int> ::iterator it = ++orderedRequests.begin (); it != orderedRequests.end (); ++it)
+//      {
+//         currentLocation = *it;
+//         record ();
+//      }
 
       return;
    }
