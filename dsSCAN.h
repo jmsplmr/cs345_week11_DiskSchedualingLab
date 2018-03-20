@@ -10,7 +10,8 @@
 
 #include "ds.h"   // for the DiskSchedulingAlgorithm base-class
 
-// using namespace std;
+#define FORWARD true;
+#define REVERSE false;
 
 /****************************************************
  * SCAN
@@ -27,6 +28,11 @@ public:
       DiskSchedulingAlgorithm (problem)
    {
       /////////////// YOUR CODE HERE ////////////////////
+      requests = std::vector<int>{ std::begin (problem.requests), std::end (problem.requests) };
+      std::sort (requests.begin (), requests.end ());
+      start = problem.startLocation;
+      numRequests = problem.diskSize;
+      direction = problem.increasing;
    }
 
    /****************************************************
@@ -40,10 +46,48 @@ public:
     ***************************************************/
    void run ()
    {
-      /////////////// YOUR CODE HERE ////////////////////
-      return;
+      requests.erase (std::remove (requests.begin (), requests.end (), requests.front()), requests.end ());
+
+      auto it = requests.begin ();
+      auto rit= requests.rbegin ();
+      while (!requests.empty ())
+      {
+         if (it == requests.end () || rit == requests.rend ())
+         {
+            it = requests.begin ();
+            rit = requests.rbegin ();
+            direction = !direction;
+         }
+
+         if (direction) 
+         {
+            if (currentLocation > *it) 
+            {
+               ++it;
+               continue;
+            }
+            currentLocation = *it;
+            record ();
+            it = requests.erase (std::remove (requests.begin (), requests.end (), *it), requests.end ());
+         }
+         else 
+         {
+            if (currentLocation < *rit)
+            {
+               ++rit;
+               continue;
+            }
+            currentLocation = *rit;
+            record ();
+            std::advance (rit, 1);
+            requests.erase( std::next(rit).base() );
+         }
+      }
    }
 
 private:
    //////////////////// YOUR CODE HERE //////////////////////
+   std::vector<int> requests;
+   int start, numRequests;
+   bool direction;
 };

@@ -79,14 +79,6 @@ public:
          currentLocation = orderedRequests[i + 1];
          record ();
       }
-
-//      for (std::vector<int> ::iterator it = ++orderedRequests.begin (); it != orderedRequests.end (); ++it)
-//      {
-//         currentLocation = *it;
-//         record ();
-//      }
-
-      return;
    }
 
 private:
