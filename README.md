@@ -52,7 +52,10 @@ Note that all algorithms will have to implement the constructor, the run() metho
 
 The testBed for this assignment is:
 
+``` sh
 testBed cs345/lab11 lab11.tar
+```
+
 Please make sure your program runs without error.
 
 ### D. Style
