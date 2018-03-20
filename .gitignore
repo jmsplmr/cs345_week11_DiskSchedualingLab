@@ -34,3 +34,4 @@
 *.vcxproj.filters
 test*.txt
 tmp.txt
+Debug/*
