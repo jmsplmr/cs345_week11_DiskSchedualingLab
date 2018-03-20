@@ -12,6 +12,7 @@
 
 #include "ds.h"   // for the DiskSchedulingAlgorithm base-class
 #include <list>   // for LIST, the member variable
+
 // remove this comment if you want to use cout for debugging
 // using namespace std;
 
@@ -21,13 +22,13 @@
  ***************************************************/
 class DiskSchedulingFCFS : public DiskSchedulingAlgorithm
 {
-public:
+   public:
    /*****************************************************
     * CONSTRUCTOR
     * initialize the data structures specific to FCFS
     *****************************************************/
-   DiskSchedulingFCFS (const ScheduleProblem & problem) :
-      DiskSchedulingAlgorithm (problem)
+   DiskSchedulingFCFS (const ScheduleProblem & problem)
+      : DiskSchedulingAlgorithm(problem)
    {
       /////////////// YOUR CODE HERE ////////////////////
 
@@ -49,20 +50,17 @@ public:
    {
       /////////////// YOUR CODE HERE ////////////////////
 
-      // loop through all the requests and move to that location
-      std::list <int> ::iterator it;
-      for (it = requests.begin (); it != requests.end (); ++it)
+      for (std::list<int>::iterator it = requests.begin(); it != requests.end();
+           ++it)
       {
          currentLocation = *it;
-         record ();
+         record();
       }
-
-      return;
    }
 
-private:
+   private:
    //////////////////// YOUR CODE HERE //////////////////////
-   std::list <int> requests;      // a copy of the list of disk requests
+   std::list<int> requests; // a copy of the list of disk requests
 };
 
 #endif // DS_FCFS
