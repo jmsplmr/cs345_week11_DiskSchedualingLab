@@ -3,7 +3,7 @@
 *    DISK SCHEDULING SCAN
 * Author:
 *    <your name here>
-* Summary: 
+* Summary:
 *    This is the DERRIVED class to implement the SCAN algorithm
 ************************************************************************/
 
@@ -25,8 +25,8 @@ public:
     * CONSTRUCTOR
     * initialize the data structures specific to SCAN
     *****************************************************/
-   DiskSchedulingSCAN(const ScheduleProblem & problem) :
-             DiskSchedulingAlgorithm(problem)
+   DiskSchedulingSCAN (const ScheduleProblem & problem) :
+      DiskSchedulingAlgorithm (problem)
    {
       /////////////// YOUR CODE HERE ////////////////////
    }
@@ -39,8 +39,8 @@ public:
     *
     * Each time a disk request is made by setting currentLocation,
     * call record() to save that.
-    ***************************************************/         
-   void run()
+    ***************************************************/
+   void run ()
    {
       /////////////// YOUR CODE HERE ////////////////////
       return;

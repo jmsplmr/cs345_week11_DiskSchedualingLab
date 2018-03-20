@@ -3,7 +3,7 @@
 *    DISK SCHEDULING FCFS
 * Author:
 *    <your name here>
-* Summary: 
+* Summary:
 *    This is the DERRIVED class to implement the FCFS algorithm
 ************************************************************************/
 
@@ -13,7 +13,7 @@
 #include "ds.h"   // for the DiskSchedulingAlgorithm base-class
 #include <list>   // for LIST, the member variable
 // remove this comment if you want to use cout for debugging
-// using namespace std;   
+// using namespace std;
 
 /****************************************************
  * FCFS
@@ -26,8 +26,8 @@ public:
     * CONSTRUCTOR
     * initialize the data structures specific to FCFS
     *****************************************************/
-   DiskSchedulingFCFS(const ScheduleProblem & problem) :
-             DiskSchedulingAlgorithm(problem)
+   DiskSchedulingFCFS (const ScheduleProblem & problem) :
+      DiskSchedulingAlgorithm (problem)
    {
       /////////////// YOUR CODE HERE ////////////////////
 
@@ -45,18 +45,18 @@ public:
     * Each time a disk request is made by setting currentLocation,
     * call record() to save that.
     ***************************************************/
-   void run()
+   void run ()
    {
       /////////////// YOUR CODE HERE ////////////////////
 
       // loop through all the requests and move to that location
-      std::list <int> :: iterator it;
-      for (it = requests.begin(); it != requests.end(); ++it)
+      std::list <int> ::iterator it;
+      for (it = requests.begin (); it != requests.end (); ++it)
       {
          currentLocation = *it;
-         record();
+         record ();
       }
-      
+
       return;
    }
 

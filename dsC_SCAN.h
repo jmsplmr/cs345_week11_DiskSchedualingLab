@@ -3,7 +3,7 @@
 *    DISK SCHEDULING C-SCAN
 * Author:
 *    <your name here>
-* Summary: 
+* Summary:
 *    This is the DERRIVED class to implement the C-SCAN algorithm
 ************************************************************************/
 
@@ -25,8 +25,8 @@ public:
     * CONSTRUCTOR
     * initialize the data structures specific to C-SCAN
     *****************************************************/
-   DiskSchedulingC_SCAN(const ScheduleProblem & problem) :
-     DiskSchedulingAlgorithm(problem)
+   DiskSchedulingC_SCAN (const ScheduleProblem & problem) :
+      DiskSchedulingAlgorithm (problem)
    {
       /////////////// YOUR CODE HERE ////////////////////
    }
@@ -37,7 +37,7 @@ public:
     * be called once and will need to complete the entire
     * simulation. With file location, send the results to record().
     ***************************************************/
-   void run()
+   void run ()
    {
       /////////////// YOUR CODE HERE ////////////////////
       return;
