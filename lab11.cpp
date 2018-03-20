@@ -39,20 +39,27 @@ DiskSchedulingType menu ()
    int input = 1;
    cout << "> ";
    cin >> input;
-   while (cin.fail () || input < 1 || input > NUM_TYPES)
+   while (cin.fail() || input < 1 || input > NUM_TYPES)
    {
       cout << "Error, invalid input. "
-         << "Please select a number between 1 and " << NUM_TYPES << ": ";
+            << "Please select a number between 1 and " << NUM_TYPES << ": ";
       cin >> input;
    }
 
    // return the type
    DiskSchedulingType array[] =
-   { // 0      1      2      3     4       5       6
-      FCFS,   FCFS,  SSTF,  SCAN, C_SCAN, LOOK, C_LOOK
+   {
+      // 0      1      2      3     4       5       6
+      FCFS,
+      FCFS,
+      SSTF,
+      SCAN,
+      C_SCAN,
+      LOOK,
+      C_LOOK
    };
-   assert (input >= 1 && input < sizeof (array) / sizeof (array[1]));
-   assert (NUM_TYPES + 1 /*for the 0 slot*/ == sizeof (array) / sizeof (array[1]));
+   assert (input >= 1 && input < sizeof sizeof array[1]);
+   assert (NUM_TYPES + 1 /*for the 0 slot*/ == sizeof sizeof array[1]);
    return array[input];
 }
 
@@ -81,12 +88,12 @@ bool readQueue (ScheduleProblem & problem)
    cin >> fileName;
 
    // open the file
-   ifstream fin (fileName);
-   if (fin.fail ())
+   ifstream fin(fileName);
+   if (fin.fail())
    {
       cout << "Unable to open file '"
-         << fileName
-         << "', exiting.\n";
+            << fileName
+            << "', exiting.\n";
       return false;
    }
 
@@ -100,7 +107,7 @@ bool readQueue (ScheduleProblem & problem)
    // is the head moving in the increasing direction or decreasing direction?
    string direction;
    fin >> direction;
-   problem.increasing = (direction == string ("increasing"));
+   problem.increasing = direction == string("increasing");
 
    // what is the location of the head when the simulation begins?
    fin >> problem.startLocation;
@@ -108,10 +115,10 @@ bool readQueue (ScheduleProblem & problem)
    // read in all the requests one at a time
    int request;
    while (fin >> request)
-      problem.requests.push_back (request);
+      problem.requests.push_back(request);
 
    // close the file
-   fin.close ();
+   fin.close();
    return true;
 }
 
@@ -123,14 +130,14 @@ int main ()
 {
    // read the process info from a file
    ScheduleProblem problem;
-   if (!readQueue (problem))
+   if (!readQueue(problem))
       return 1;
 
    // select the disk scheduling algorithm
-   DiskSchedulingAlgorithm * p = dsFactory (menu (), problem);
+   DiskSchedulingAlgorithm * p = dsFactory(menu(), problem);
 
    // run the simulation
-   p->run ();
+   p->run();
 
    // display the results
    cout << *p;
