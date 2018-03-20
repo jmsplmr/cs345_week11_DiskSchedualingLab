@@ -30,3 +30,7 @@
 *.exe
 *.out
 *.app
+*.vcxproj
+*.vcxproj.filters
+test*.txt
+tmp.txt
