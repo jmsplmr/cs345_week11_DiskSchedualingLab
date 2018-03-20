@@ -20,13 +20,13 @@
  ***************************************************/
 class DiskSchedulingC_SCAN : public DiskSchedulingAlgorithm
 {
-   public:
+public:
    /*****************************************************
     * CONSTRUCTOR
     * initialize the data structures specific to C-SCAN
     *****************************************************/
-   DiskSchedulingC_SCAN (const ScheduleProblem & problem)
-      : DiskSchedulingAlgorithm(problem)
+   DiskSchedulingC_SCAN (const ScheduleProblem & problem) :
+      DiskSchedulingAlgorithm (problem)
    {
       /////////////// YOUR CODE HERE ////////////////////
    }
@@ -38,9 +38,12 @@ class DiskSchedulingC_SCAN : public DiskSchedulingAlgorithm
     * simulation. With file location, send the results to record().
     ***************************************************/
    void run ()
-   { }
+   {
+      /////////////// YOUR CODE HERE ////////////////////
+      return;
+   }
 
-   private:
+private:
    //////////////////// YOUR CODE HERE //////////////////////
 };
 

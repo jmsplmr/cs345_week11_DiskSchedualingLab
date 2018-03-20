@@ -20,13 +20,13 @@
  ***************************************************/
 class DiskSchedulingSCAN : public DiskSchedulingAlgorithm
 {
-   public:
+public:
    /*****************************************************
     * CONSTRUCTOR
     * initialize the data structures specific to SCAN
     *****************************************************/
-   DiskSchedulingSCAN (const ScheduleProblem & problem)
-      : DiskSchedulingAlgorithm(problem)
+   DiskSchedulingSCAN (const ScheduleProblem & problem) :
+      DiskSchedulingAlgorithm (problem)
    {
       /////////////// YOUR CODE HERE ////////////////////
    }
@@ -41,9 +41,12 @@ class DiskSchedulingSCAN : public DiskSchedulingAlgorithm
     * call record() to save that.
     ***************************************************/
    void run ()
-   { }
+   {
+      /////////////// YOUR CODE HERE ////////////////////
+      return;
+   }
 
-   private:
+private:
    //////////////////// YOUR CODE HERE //////////////////////
 };
 

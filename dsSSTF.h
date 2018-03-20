@@ -20,13 +20,13 @@
  ***************************************************/
 class DiskSchedulingSSTF : public DiskSchedulingAlgorithm
 {
-   public:
+public:
    /*****************************************************
     * CONSTRUCTOR
     * initialize the data structures specific to SSTF
     *****************************************************/
-   DiskSchedulingSSTF (const ScheduleProblem & problem)
-      : DiskSchedulingAlgorithm(problem)
+   DiskSchedulingSSTF (const ScheduleProblem & problem) :
+      DiskSchedulingAlgorithm (problem)
    {
       /////////////// YOUR CODE HERE ////////////////////
    }
@@ -41,9 +41,12 @@ class DiskSchedulingSSTF : public DiskSchedulingAlgorithm
     * call record() to save that.
     ***************************************************/
    void run ()
-   { }
+   {
+      /////////////// YOUR CODE HERE ////////////////////
+      return;
+   }
 
-   private:
+private:
    //////////////////// YOUR CODE HERE //////////////////////
 };
 

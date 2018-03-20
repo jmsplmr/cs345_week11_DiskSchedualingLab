@@ -12,10 +12,11 @@
 #define DS_H
 
 #include <iostream>   // for the insertion operator
+#include <cassert>    // because I am paranoid
+#include <queue>      // the queue of disk requests
 #include <list>       // for a history of all the track requests
 
 enum DiskSchedulingType { FCFS, SSTF, SCAN, C_SCAN, LOOK, C_LOOK };
-
 #define NUM_TYPES 6
 
 /*******************************************************
@@ -24,10 +25,10 @@ enum DiskSchedulingType { FCFS, SSTF, SCAN, C_SCAN, LOOK, C_LOOK };
  ******************************************************/
 struct ScheduleProblem
 {
-   int diskSize; // how many locations in this problem
-   int startLocation; // the start location
-   bool increasing; // is the head moving up?
-   std::list<int> requests; // the collection of requests
+   int             diskSize;         // how many locations in this problem
+   int             startLocation;    // the start location
+   bool            increasing;       // is the head moving up?
+   std::list <int> requests;         // the collection of requests
 };
 
 /*****************************************************
@@ -36,17 +37,16 @@ struct ScheduleProblem
  ****************************************************/
 class DiskSchedulingAlgorithm
 {
-   public:
+public:
    //
    // The following three methods may need to be modified in the derrived class
    //
 
    // only constructor: one parameter for the details of the problem
-   DiskSchedulingAlgorithm (const ScheduleProblem & problem)
-      : headStarts(problem.startLocation),
-        currentLocation(problem.startLocation),
-        diskSize(problem.diskSize)
-   {}
+   DiskSchedulingAlgorithm (const ScheduleProblem & problem) :
+      headStarts (problem.startLocation),
+      currentLocation (problem.startLocation),
+      diskSize (problem.diskSize) {}
 
    // run the simulation. This needs to be implemented
    virtual void run () = 0;
@@ -54,7 +54,8 @@ class DiskSchedulingAlgorithm
    //  find the distance between points
    virtual int computeDistance (int pt)
    {
-      return pt > currentLocation ? pt - currentLocation : currentLocation - pt;
+      return (pt > currentLocation) ?
+         (pt - currentLocation) : (currentLocation - pt);
    }
 
    //
@@ -62,39 +63,38 @@ class DiskSchedulingAlgorithm
    //
 
    // display the status of the simulation
-   friend std::ostream & operator << (
-      std::ostream & out,
-      DiskSchedulingAlgorithm & rhs);
+   friend std::ostream & operator <<
+      (std::ostream & out, DiskSchedulingAlgorithm & rhs);
 
    // find the disk size
-   int getDiskSize () const
-   {
-      return diskSize;
-   }
+   int getDiskSize () const { return diskSize; }
 
-   void resetHeadToStart ()
-   {
-      currentLocation = headStarts;
-   }
+   void resetHeadToStart () { currentLocation = headStarts; }
 
-   protected:
+protected:
    // before calling record(), make sure to update currentLocation
-   int currentLocation; // the current location of the head
+   int currentLocation;         // the current location of the head
 
    // call this method every time currentLocation is updated
    void record ()
    {
-      history.push_back(currentLocation);
+      history.push_back (currentLocation);
    }
 
-   private:
-   std::list<int> history; // the history of all track locations
-   int headStarts; // the place where the head starts
-   int diskSize; // number of locations on the disk
+private:
+   std::list <int> history;  // the history of all track locations
+   int headStarts;           // the place where the head starts
+   int diskSize;             // number of locations on the disk
 };
 
-DiskSchedulingAlgorithm * dsFactory (
-   DiskSchedulingType dst,
+#include "dsFCFS.h"
+#include "dsSSTF.h"
+#include "dsSCAN.h"
+#include "dsC_SCAN.h"
+#include "dsLOOK.h"
+#include "dsC_LOOK.h"
+
+DiskSchedulingAlgorithm * dsFactory (DiskSchedulingType dst,
    const ScheduleProblem & problem);
 
 #endif // DS_H

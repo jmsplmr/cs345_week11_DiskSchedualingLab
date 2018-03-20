@@ -22,33 +22,34 @@ using namespace std;
  **********************************************/
 ostream & operator << (ostream & out, DiskSchedulingAlgorithm & rhs)
 {
-   int num = rhs.history.size();
+   int num = rhs.history.size ();
    int totalTraversed = 0;
+
+   list <int> ::const_iterator it;
 
    // header
    out << "Start   Finish   Distance\n";
 
    // display the distance traveled
-   rhs.resetHeadToStart();
-   for (list<int>::const_iterator it = rhs.history.begin();
-        it != rhs.history.end(); ++it)
+   rhs.resetHeadToStart ();
+   for (it = rhs.history.begin (); it != rhs.history.end (); ++it)
    {
-      out << setw(4) << rhs.currentLocation
-            << " --->"
-            << setw(4) << *it;
+      out << setw (4) << rhs.currentLocation
+         << " --->"
+         << setw (4) << *it;
 
-      int distanceTraveled = rhs.computeDistance(*it);
+      int distanceTraveled = rhs.computeDistance (*it);
       rhs.currentLocation = *it;
       totalTraversed += distanceTraveled;
 
-      out << setw(9) << distanceTraveled << endl;
+      out << setw (9) << distanceTraveled << endl;
    }
    out << endl;
 
    // display the summary
-   out.setf(ios::fixed | ios::showpoint);
-   out.precision(1);
-   out << "Average: " << (float)totalTraversed / (float)num << endl;
+   out.setf (ios::fixed | ios::showpoint);
+   out.precision (1);
+   out << "Average: " << ((float)totalTraversed / (float)num) << endl;
 
    return out;
 }
@@ -58,26 +59,25 @@ ostream & operator << (ostream & out, DiskSchedulingAlgorithm & rhs)
  * Create an instance of a Disk Scheduling Algorithm that implements
  * a specific algorithm
  *****************************************************/
-DiskSchedulingAlgorithm * dsFactory (
-   DiskSchedulingType dst,
+DiskSchedulingAlgorithm * dsFactory (DiskSchedulingType dst,
    const ScheduleProblem & problem)
 {
    switch (dst)
    {
-      case FCFS:
-         return new DiskSchedulingFCFS(problem);
-      case SSTF:
-         return new DiskSchedulingSSTF(problem);
-      case SCAN:
-         return new DiskSchedulingSCAN(problem);
-      case C_SCAN:
-         return new DiskSchedulingC_SCAN(problem);
-      case LOOK:
-         return new DiskSchedulingLOOK(problem);
-      case C_LOOK:
-         return new DiskSchedulingC_LOOK(problem);
+   case FCFS:
+      return new DiskSchedulingFCFS (problem);
+   case SSTF:
+      return new DiskSchedulingSSTF (problem);
+   case SCAN:
+      return new DiskSchedulingSCAN (problem);
+   case C_SCAN:
+      return new DiskSchedulingC_SCAN (problem);
+   case LOOK:
+      return new DiskSchedulingLOOK (problem);
+   case C_LOOK:
+      return new DiskSchedulingC_LOOK (problem);
    }
 
    assert (false);
-   return new DiskSchedulingFCFS(problem);
+   return new DiskSchedulingFCFS (problem);
 }
