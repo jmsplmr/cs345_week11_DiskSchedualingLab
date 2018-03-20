@@ -7,9 +7,7 @@
 *    This is the base-class that enables various
 *    disk scheduling algorithms
 ************************************************************************/
-
-#ifndef DS_H
-#define DS_H
+#pragma once
 
 #include <iostream>   // for the insertion operator
 #include <cassert>    // because I am paranoid
@@ -96,5 +94,3 @@ private:
 
 DiskSchedulingAlgorithm * dsFactory (DiskSchedulingType dst,
    const ScheduleProblem & problem);
-
-#endif // DS_H

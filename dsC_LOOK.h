@@ -7,8 +7,7 @@
 *    This is the DERRIVED class to implement the C-LOOK algorithm
 ************************************************************************/
 
-#ifndef DS_C_LOOK
-#define DS_C_LOOK
+#pragma once
 
 #include "ds.h"   // for the DiskSchedulingAlgorithm base-class
 
@@ -47,5 +46,3 @@ public:
 private:
    //////////////////// YOUR CODE HERE //////////////////////
 };
-
-#endif // DS_C_LOOK

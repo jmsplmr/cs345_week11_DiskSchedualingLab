@@ -7,12 +7,30 @@
 *    This is the DERRIVED class to implement the SSTF algorithm
 ************************************************************************/
 
-#ifndef DS_SSTF
-#define DS_SSTF
+#pragma once
 
-#include "ds.h"   // for the DiskSchedulingAlgorithm base-class
+#include <algorithm>
+#include <list>
+#include <iterator>
+#include <iostream>
 
-// using namespace std;
+// vec is assumed to be sorted
+inline int closest (const std::vector<int> vec, const int value)
+{
+   const auto closestVal = std::lower_bound (vec.begin (), vec.end (), value);
+
+   if (closestVal == vec.end ())
+   {
+      if (vec.empty ()) return -1;
+      return *vec.rbegin ();
+   }
+   return *closestVal;
+}
+
+inline void removeRequest (std::vector<int> & vec, const int request)
+{
+   vec.erase (std::remove (vec.begin (), vec.end (), request), vec.end ());
+}
 
 /****************************************************
  * SSTF
@@ -29,6 +47,10 @@ public:
       DiskSchedulingAlgorithm (problem)
    {
       /////////////// YOUR CODE HERE ////////////////////
+      requests = std::vector<int>{ std::begin (problem.requests), std::end (problem.requests) };
+      std::sort (requests.begin (), requests.end ());
+      start = problem.startLocation;
+      numRequests = problem.diskSize;
    }
 
    /****************************************************
@@ -43,11 +65,31 @@ public:
    void run ()
    {
       /////////////// YOUR CODE HERE ////////////////////
+      std::vector<int> orderedRequests;
+
+      orderedRequests.push_back (start);
+      removeRequest (requests, start);
+
+      for (int i = 0; i < numRequests; ++i )
+      {
+         int closestRequest = closest (requests, orderedRequests[i]);
+         if (closestRequest == -1) break;
+         orderedRequests.push_back (closestRequest);
+         removeRequest (requests, closestRequest);
+      }
+
+      std::vector<int> ::iterator it;
+      for (it = ++orderedRequests.begin (); it != orderedRequests.end (); ++it)
+      {
+         currentLocation = *it;
+         record ();
+      }
+
       return;
    }
 
 private:
    //////////////////// YOUR CODE HERE //////////////////////
+   std::vector<int> requests;
+   int start, numRequests;
 };
-
-#endif // DS_SSTF

@@ -16,7 +16,7 @@
 #include <fstream>
 #include <cassert>
 #include "ds.h"
-using namespace std;
+#include <string>
 
 /*****************************************************************
  * MENU
@@ -26,24 +26,24 @@ using namespace std;
 DiskSchedulingType menu ()
 {
    // present a list of options
-   cout << "Please select one of the following disk scheduling algorithms:\n";
-   cout << "  1. First-Come, First-Served\n";
-   cout << "  2. Shortest-Seek-Time-First\n";
-   cout << "  3. SCAN (elevator) algorithm\n";
-   cout << "  4. Circular SCAN\n";
-   cout << "  5. LOOK\n";
-   cout << "  6. Circular LOOK\n";
+   std::cout << "Please select one of the following disk scheduling algorithms:\n";
+   std::cout << "  1. First-Come, First-Served\n";
+   std::cout << "  2. Shortest-Seek-Time-First\n";
+   std::cout << "  3. SCAN (elevator) algorithm\n";
+   std::cout << "  4. Circular SCAN\n";
+   std::cout << "  5. LOOK\n";
+   std::cout << "  6. Circular LOOK\n";
 
    // prompt the user for a selection
-   assert (cin.good ());
+   assert (std::cin.good ());
    int input = 1;
-   cout << "> ";
-   cin >> input;
-   while (cin.fail () || input < 1 || input > NUM_TYPES)
+   std::cout << "> ";
+   std::cin >> input;
+   while (std::cin.fail () || input < 1 || input > NUM_TYPES)
    {
-      cout << "Error, invalid input. "
+      std::cout << "Error, invalid input. "
          << "Please select a number between 1 and " << NUM_TYPES << ": ";
-      cin >> input;
+      std::cin >> input;
    }
 
    // return the type
@@ -77,14 +77,14 @@ bool readQueue (ScheduleProblem & problem)
 {
    // prompt for filename
    char fileName[256];
-   cout << "What is the filename of the disk queue file? ";
-   cin >> fileName;
+   std::cout << "What is the filename of the disk queue file? ";
+   std::cin >> fileName;
 
    // open the file
-   ifstream fin (fileName);
+   std::ifstream fin (fileName);
    if (fin.fail ())
    {
-      cout << "Unable to open file '"
+      std::cout << "Unable to open file '"
          << fileName
          << "', exiting.\n";
       return false;
@@ -98,9 +98,9 @@ bool readQueue (ScheduleProblem & problem)
    fin >> problem.diskSize;
 
    // is the head moving in the increasing direction or decreasing direction?
-   string direction;
+   std::string direction;
    fin >> direction;
-   problem.increasing = (direction == string ("increasing"));
+   problem.increasing = (direction == std::string ("increasing"));
 
    // what is the location of the head when the simulation begins?
    fin >> problem.startLocation;
@@ -133,7 +133,7 @@ int main ()
    p->run ();
 
    // display the results
-   cout << *p;
+   std::cout << *p;
 
    // make like a tree
    delete p;

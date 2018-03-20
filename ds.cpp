@@ -14,18 +14,16 @@
 #include <cassert>    // because I am paranoid
 #include "ds.h"       // for the DiskSchedulingAlgorithm class definition
 
-using namespace std;
-
 /**********************************************
  * DISPLAY
  * Display the history of all the executions
  **********************************************/
-ostream & operator << (ostream & out, DiskSchedulingAlgorithm & rhs)
+std::ostream & operator << (std::ostream & out, DiskSchedulingAlgorithm & rhs)
 {
    int num = rhs.history.size ();
    int totalTraversed = 0;
 
-   list <int> ::const_iterator it;
+   std::list <int> ::const_iterator it;
 
    // header
    out << "Start   Finish   Distance\n";
@@ -34,22 +32,22 @@ ostream & operator << (ostream & out, DiskSchedulingAlgorithm & rhs)
    rhs.resetHeadToStart ();
    for (it = rhs.history.begin (); it != rhs.history.end (); ++it)
    {
-      out << setw (4) << rhs.currentLocation
+      out << std::setw (4) << rhs.currentLocation
          << " --->"
-         << setw (4) << *it;
+         << std::setw (4) << *it;
 
       int distanceTraveled = rhs.computeDistance (*it);
       rhs.currentLocation = *it;
       totalTraversed += distanceTraveled;
 
-      out << setw (9) << distanceTraveled << endl;
+      out << std::setw (9) << distanceTraveled << std::endl;
    }
-   out << endl;
+   out << std::endl;
 
    // display the summary
-   out.setf (ios::fixed | ios::showpoint);
+   out.setf (std::ios::fixed | std::ios::showpoint);
    out.precision (1);
-   out << "Average: " << ((float)totalTraversed / (float)num) << endl;
+   out << "Average: " << ((float)totalTraversed / (float)num) << std::endl;
 
    return out;
 }

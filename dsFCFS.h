@@ -7,13 +7,10 @@
 *    This is the DERRIVED class to implement the FCFS algorithm
 ************************************************************************/
 
-#ifndef DS_FCFS
-#define DS_FCFS
+#pragma once
 
 #include "ds.h"   // for the DiskSchedulingAlgorithm base-class
 #include <list>   // for LIST, the member variable
-// remove this comment if you want to use cout for debugging
-// using namespace std;
 
 /****************************************************
  * FCFS
@@ -64,5 +61,3 @@ private:
    //////////////////// YOUR CODE HERE //////////////////////
    std::list <int> requests;      // a copy of the list of disk requests
 };
-
-#endif // DS_FCFS

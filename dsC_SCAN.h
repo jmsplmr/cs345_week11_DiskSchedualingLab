@@ -7,8 +7,7 @@
 *    This is the DERRIVED class to implement the C-SCAN algorithm
 ************************************************************************/
 
-#ifndef DS_C_SCAN
-#define DS_C_SCAN
+#pragma once
 
 #include "ds.h"   // for the DiskSchedulingAlgorithm base-class
 
@@ -46,5 +45,3 @@ public:
 private:
    //////////////////// YOUR CODE HERE //////////////////////
 };
-
-#endif // DS_C_SCAN
