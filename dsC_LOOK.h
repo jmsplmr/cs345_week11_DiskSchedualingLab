@@ -2,7 +2,7 @@
 * Component:
 *    DISK SCHEDULING C-LOOK
 * Author:
-*    <your name here>
+*    James Palmer
 * Summary: 
 *    This is the DERRIVED class to implement the C-LOOK algorithm
 ************************************************************************/

@@ -1,9 +1,9 @@
 /***********************************************************************
 * Program:
 *    Lab 11: Disk Scheduling Lab
-*    <your instructor>, CS 345
+*    Brother Ball, CS 345
 * Author:
-*    <your name>
+*    James Palmer
 * Summary:
 *    This is the driver program to exercise the disk scheduling algorithm
 *

@@ -2,7 +2,7 @@
 * Component:
 *    DISK SCHEDULING SCAN
 * Author:
-*    <your name here>
+*    James Palmer
 * Summary:
 *    This is the DERRIVED class to implement the SCAN algorithm
 ************************************************************************/

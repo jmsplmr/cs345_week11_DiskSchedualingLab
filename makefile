@@ -1,13 +1,13 @@
 ###############################################################
 # Program:
 #     Lab 11, Disk Scheduling Lab
-#     <your instructor>, CS345
+#     Brother Ball, CS345
 # Author:
-#     <your name here>
+#     James Palmer
 # Summary:
-#     <put a description here>
+#     // TODO Fill out this summary
 # Time:
-#     <how long did it take to complete this program?>
+#     // TODO Fill out time to complete
 ###############################################################
 
 ##############################################################
