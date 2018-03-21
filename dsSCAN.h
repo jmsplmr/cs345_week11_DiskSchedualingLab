@@ -46,52 +46,48 @@ class DiskSchedulingSCAN : public DiskSchedulingAlgorithm
     ***************************************************/
    void run ()
    {
-      int i;
-      int temp;
-      int numLocations = requests.size();
-      int * reqs = new int [numLocations];
-      int disk = start; //loc of head
-      int dloc; //loc of disk in array
-      for (i = 0; i < numLocations; i++)
+      int count = 0;
+      int begin = 0;
+      
+      for (int i = 0; i < numRequests; ++i)
       {
-         reqs[i] = requests.at(i);
-      }
-      reqs[numLocations] = disk;
-      numLocations = numLocations + 1;
-      for (i = 0; i < numLocations; i++) // sorting disk locations
-      {
-         for (int j = i; j < numLocations; j++)
+         if (requests.at(i) > start)
          {
-            if (reqs[i] > reqs[j])
-            {
-               temp = reqs[i];
-               reqs[i] = reqs[j];
-               reqs[j] = temp;
-            }
-         }
-      }
-      for (i = 0; i < numLocations; i++) // to find loc of disc in array
-      {
-         if (disk == reqs[i])
-         {
-            dloc = i;
+            begin = i;
             break;
          }
       }
-      for (i = dloc; i >= 0; i--)
-      {
-         currentLocation = reqs[i];
-         record();
-      }
-      currentLocation = 0;
-      record();
-      for (i = dloc + 1; i < numLocations; i++)
-      {
-         currentLocation = reqs[i];
-         record();
-      }
 
-      delete[] reqs;
+      while (count <= requests.size()) {
+         if (!direction)
+         {
+            int i = begin - 1;
+            while (i >= 0)
+            {
+               currentLocation = requests[i];
+               record ();
+               ++count;
+               --i;
+            }
+            currentLocation = 0;
+            record ();
+            ++count;
+            direction = !direction;
+
+         }
+         else
+         {
+            int i = begin;
+            while (i < requests.size())
+            {
+               currentLocation = requests[i];
+               record ();
+               ++count;
+               ++i;
+            }
+            direction = !direction;
+         }
+      }
    }
 
    private:
