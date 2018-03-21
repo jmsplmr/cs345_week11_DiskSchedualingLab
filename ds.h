@@ -52,8 +52,8 @@ public:
    //  find the distance between points
    virtual int computeDistance (int pt)
    {
-      return (pt > currentLocation) ?
-         (pt - currentLocation) : (currentLocation - pt);
+      return pt > currentLocation ?
+         pt - currentLocation : currentLocation - pt;
    }
 
    //

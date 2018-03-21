@@ -10,9 +10,6 @@
 
 #include "ds.h"   // for the DiskSchedulingAlgorithm base-class
 
-#define FORWARD true;
-#define REVERSE false;
-
 /****************************************************
  * SCAN
  * The SCAN (aka Elevator) disk scheduling algorithm
@@ -46,43 +43,12 @@ public:
     ***************************************************/
    void run ()
    {
-      requests.erase (std::remove (requests.begin (), requests.end (), requests.front()), requests.end ());
+      int spot = 0;
+//      while(!requests.empty())
+//      {
+//         
+//      }
 
-      auto it = requests.begin ();
-      auto rit= requests.rbegin ();
-      while (!requests.empty ())
-      {
-         if (it == requests.end () || rit == requests.rend ())
-         {
-            it = requests.begin ();
-            rit = requests.rbegin ();
-            direction = !direction;
-         }
-
-         if (direction) 
-         {
-            if (currentLocation > *it) 
-            {
-               ++it;
-               continue;
-            }
-            currentLocation = *it;
-            record ();
-            it = requests.erase (std::remove (requests.begin (), requests.end (), *it), requests.end ());
-         }
-         else 
-         {
-            if (currentLocation < *rit)
-            {
-               ++rit;
-               continue;
-            }
-            currentLocation = *rit;
-            record ();
-            std::advance (rit, 1);
-            requests.erase( std::next(rit).base() );
-         }
-      }
    }
 
 private:

@@ -17,14 +17,18 @@
 // vec is assumed to be sorted
 inline int closest (const std::vector<int> vec, const int value)
 {
-   const auto closestVal = std::lower_bound (vec.begin (), vec.end (), value);
-
-   if (closestVal == vec.end ())
+   const auto upper = std::lower_bound (vec.begin (), vec.end (), value);
+   auto lower = std::lower_bound (vec.begin (), vec.end (), value);
+   
+   if (upper != vec.begin ())
+      lower = lower - 1;
+   if (upper == vec.end ())
    {
       if (vec.empty ()) return -1;
       return *vec.rbegin ();
    }
-   return *closestVal;
+
+   return abs(value - *upper) < abs(value - *lower)? *upper : *lower;
 }
 
 inline void removeRequest (std::vector<int> & vec, const int request)
