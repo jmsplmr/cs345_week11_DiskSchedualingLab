@@ -27,6 +27,14 @@ public:
       DiskSchedulingAlgorithm (problem)
    {
       /////////////// YOUR CODE HERE ////////////////////
+      requests = std::vector<int>{
+         std::begin (problem.requests),
+         std::end (problem.requests)
+      };
+      std::sort (requests.begin (), requests.end ());
+      start = problem.startLocation;
+      numRequests = problem.diskSize;
+      direction = problem.increasing;
    }
 
    /****************************************************
@@ -41,9 +49,50 @@ public:
    void run ()
    {
       /////////////// YOUR CODE HERE ////////////////////
-      return;
+      int count = 0;
+      int begin = 0;
+
+      for (int i = 0; i < numRequests; ++i)
+      {
+         if (requests.at (i) > start)
+         {
+            begin = i;
+            break;
+         }
+      }
+
+      while (count < requests.size ()) {
+         if (!direction)
+         {
+            int i = begin - 1;
+            while (i >= 0)
+            {
+               currentLocation = requests[i];
+               record ();
+               ++count;
+               --i;
+            }
+            direction = !direction;
+
+         }
+         else
+         {
+            int i = begin;
+            while (i < requests.size ())
+            {
+               currentLocation = requests[i];
+               record ();
+               ++count;
+               ++i;
+            }
+            direction = !direction;
+         }
+      }
    }
 
 private:
    //////////////////// YOUR CODE HERE //////////////////////
+   std::vector<int> requests;
+   int start, numRequests;
+   bool direction;
 };
